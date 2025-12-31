@@ -21,6 +21,10 @@ export default function RootLayout({
             </a>
 
             <nav className="flex items-center gap-3 text-sm">
+              <a className="text-white/70 hover:text-white" href="/dashboard">
+                Dashboard
+              </a>
+
               <a className="text-white/70 hover:text-white" href="/seals">
                 Seals
               </a>

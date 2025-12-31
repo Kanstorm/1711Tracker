@@ -22,7 +22,7 @@ export default function LoginPage() {
       setMsg(error.message);
       return;
     }
-    window.location.href = "/seals";
+    window.location.href = "/dashboard";
   }
 
   return (
