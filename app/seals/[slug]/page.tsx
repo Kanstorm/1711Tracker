@@ -92,8 +92,13 @@ export default function SealDetail({
       setCompletedMap(map);
     })();
   }, [slug]);
+  
 
   async function toggleObjective(objectiveId: string, newVal: boolean) {
+      if (completedMap[objectiveId] && newVal === false) {
+  // Already completed -> do not allow unchecking
+  return;
+  }
     setMsg(null);
 
     const { data: session } = await supabase.auth.getSession();
@@ -161,9 +166,11 @@ export default function SealDetail({
               <input
                 type="checkbox"
                 checked={!!completedMap[o.id]}
+                disabled={!!completedMap[o.id]} // lock once completed
                 onChange={(e) => toggleObjective(o.id, e.target.checked)}
-                className="mt-1 h-4 w-4 accent-amber-300"
-              />
+                className="mt-1 h-4 w-4 accent-amber-300 disabled:opacity-60 disabled:cursor-not-allowed"
+      />
+
               <div className="min-w-0">
                 <div className="font-semibold text-white">{o.title}</div>
                 {o.description && <div className="mt-1 text-sm text-white/60">{o.description}</div>}
